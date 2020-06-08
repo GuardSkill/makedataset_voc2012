@@ -1,0 +1,1 @@
+CUDA_VISIBLE_DEVICES=2,3 python train.py --backbone mobilenet --lr 0.004 --use-sbd --workers 4 --epochs 50 --batch-size 16 --gpu-ids 0,1 --checkname deeplab-mobilenet_org_data_0.004 --eval-interval 1 --dataset pascal
