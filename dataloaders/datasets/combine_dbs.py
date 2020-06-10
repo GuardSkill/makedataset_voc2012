@@ -143,13 +143,16 @@ def load_combined_dataset(comibne_dataset):
 def make_dataset_val(train_dataset,val_dataset,dir='/home/lulu/Dataset/Voc2012_aug'):
     train_imgs_dir=os.path.join(dir, 'JPEGImages', 'train')
     test_imgs_dir=os.path.join(dir, 'JPEGImages', 'test')
-    labels_dir=os.path.join(dir, 'SegmentationClassAug')
+    labels_dir=os.path.join(dir, 'SegmentationClassAug', 'train')
+    test_labels_dir = os.path.join(dir, 'SegmentationClassAug', 'test')
     if not os.path.isdir(train_imgs_dir):
         os.makedirs(train_imgs_dir)
     if not os.path.isdir(test_imgs_dir):
         os.makedirs(test_imgs_dir)
     if not os.path.isdir(labels_dir):
         os.makedirs(labels_dir)
+    if not os.path.isdir(test_labels_dir):
+        os.makedirs(test_labels_dir)
     import shutil
     for index in range(train_dataset.im_ids.__len__()):
         _db_ii = train_dataset.cat_list[index]["db_ii"]
@@ -164,7 +167,7 @@ def make_dataset_val(train_dataset,val_dataset,dir='/home/lulu/Dataset/Voc2012_a
         sample = val_dataset.images[index]
         label = val_dataset.categories[index]
         shutil.copyfile(sample, os.path.join(test_imgs_dir,os.path.basename(sample)))
-        shutil.copyfile(label, os.path.join(labels_dir,os.path.basename(label)))
+        shutil.copyfile(label, os.path.join(test_labels_dir,os.path.basename(label)))
     print("Save {} test samples".format(val_dataset.images.__len__()))
     return None
 
